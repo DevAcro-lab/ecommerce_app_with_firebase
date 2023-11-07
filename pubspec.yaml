@@ -39,6 +39,10 @@ dependencies:
   persistent_bottom_nav_bar: ^5.0.2
   readmore: ^2.2.0
   flutter_rating_bar: ^4.0.1
+  firebase_auth: ^4.12.1
+  firebase_core: ^2.21.0
+  firebase_storage: ^11.4.1
+  cloud_firestore: ^4.12.2
 
 dev_dependencies:
   flutter_test:

@@ -15,9 +15,7 @@ class SplashScreen2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = MediaQuery.of(context).size;
-    // final provider = Provider.of<ToggleSplashScreenButton>(context);
     return Scaffold(
-      // backgroundColor: primaryColor,
       body: Container(
         height: s.height,
         decoration: BoxDecoration(

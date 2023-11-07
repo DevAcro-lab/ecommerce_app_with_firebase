@@ -1,5 +1,5 @@
 import 'package:ecommerce_app_with_firebase/constants/colors.dart';
-import 'package:ecommerce_app_with_firebase/views/NotificationsScreen.dart';
+import 'package:ecommerce_app_with_firebase/views/notifications_screen.dart';
 import 'package:ecommerce_app_with_firebase/views/home_screen.dart';
 import 'package:ecommerce_app_with_firebase/views/profile_screen.dart';
 import 'package:ecommerce_app_with_firebase/views/shopping_card_screen.dart';

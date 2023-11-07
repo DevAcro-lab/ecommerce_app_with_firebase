@@ -1,8 +1,10 @@
 import 'package:ecommerce_app_with_firebase/constants/colors.dart';
 import 'package:ecommerce_app_with_firebase/constants/routes.dart';
+import 'package:ecommerce_app_with_firebase/custom_widgets/drawer_widget.dart';
 import 'package:ecommerce_app_with_firebase/custom_widgets/header_container.dart';
 import 'package:ecommerce_app_with_firebase/views/details_screen.dart';
 import 'package:ecommerce_app_with_firebase/views/shopping_card_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../custom_widgets/brand_container.dart';
@@ -109,9 +111,15 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                HeaderContainer(
-                  onTap: () {},
-                  icon: Icons.menu_open_outlined,
+                Builder(
+                  builder: (context) {
+                    return HeaderContainer(
+                      onTap: () {
+                        Scaffold.of(context).openDrawer();
+                      },
+                      icon: Icons.menu_open_outlined,
+                    );
+                  },
                 ),
                 HeaderContainer(
                   onTap: () {
@@ -332,6 +340,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+      drawer: const DrawerWidget(),
     );
   }
 }

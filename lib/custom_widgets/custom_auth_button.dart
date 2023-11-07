@@ -7,10 +7,12 @@ class CustomAuthButton extends StatelessWidget {
     super.key,
     required this.title,
     required this.onTap,
+    this.isLoading = false,
   });
 
   final String title;
   final VoidCallback onTap;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +27,17 @@ class CustomAuthButton extends StatelessWidget {
           color: primaryColor,
         ),
         child: Center(
-          child: Text(
-            title,
-            style: const TextStyle(
-              fontSize: 17,
-              color: whiteColor,
-            ),
-          ),
+          child: isLoading
+              ? const CircularProgressIndicator(
+                  color: whiteColor,
+                )
+              : Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 17,
+                    color: whiteColor,
+                  ),
+                ),
         ),
       ),
     );
