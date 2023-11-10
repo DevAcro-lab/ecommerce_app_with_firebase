@@ -1,10 +1,14 @@
 import 'package:ecommerce_app_with_firebase/constants/colors.dart';
 import 'package:ecommerce_app_with_firebase/constants/routes.dart';
 import 'package:ecommerce_app_with_firebase/custom_widgets/auth_header_widget.dart';
+import 'package:ecommerce_app_with_firebase/custom_widgets/cupertino_alert_dialog.dart';
 import 'package:ecommerce_app_with_firebase/custom_widgets/custom_auth_button.dart';
 import 'package:ecommerce_app_with_firebase/custom_widgets/auth_textfield_with_title.dart';
+import 'package:ecommerce_app_with_firebase/provider/auth_provider.dart';
+import 'package:ecommerce_app_with_firebase/views/auth_view/sign_in_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'otp_verification_screen.dart';
+import 'package:provider/provider.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({Key? key}) : super(key: key);
@@ -19,6 +23,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     final s = MediaQuery.of(context).size;
+    final authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(
@@ -55,10 +60,42 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       bottomNavigationBar: CustomAuthButton(
         title: 'Confirm Mail',
         onTap: () {
-          nextPage(
-            context,
-            const OPTVerificationScreen(),
-          );
+          authProvider
+              .forgotPassword(emailController.text)
+              .then(
+                (value) => showCupertinoDialog(
+                  context: context,
+                  builder: (context) => buildCupertinoAlertDialog(
+                      s: s,
+                      context: context,
+                      title: 'Reset Password',
+                      onTap: () {
+                        nextPageRemovePrevious(
+                          context,
+                          const SignInScreen(),
+                        );
+                      },
+                      buttonTitle: 'Go back',
+                      icon: Icons.lock_outline,
+                      content: 'Password Reset Email Sent'),
+                ),
+              )
+              .catchError(
+                (error, stackTrace) => showCupertinoDialog(
+                  context: context,
+                  builder: (context) => buildCupertinoAlertDialog(
+                    s: s,
+                    context: context,
+                    title: 'Account Info',
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icons.lock_outline_rounded,
+                    content: "Please enter a registered email",
+                    buttonTitle: 'Try Again',
+                  ),
+                ),
+              );
         },
       ),
     );

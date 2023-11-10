@@ -1,4 +1,5 @@
 import 'package:ecommerce_app_with_firebase/constants/colors.dart';
+import 'package:ecommerce_app_with_firebase/custom_widgets/navigation_bar_widget.dart';
 import 'package:ecommerce_app_with_firebase/provider/auth_provider.dart';
 import 'package:ecommerce_app_with_firebase/views/home_screen.dart';
 import 'package:ecommerce_app_with_firebase/views/splash_screen_2.dart';
@@ -18,7 +19,9 @@ class Wrapper extends StatelessWidget {
       builder: (_, AsyncSnapshot<UserModel?> snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           final UserModel? user = snapshot.data;
-          return user == null ? const SplashScreen2() : const HomeScreen();
+          return user == null
+              ? const SplashScreen2()
+              : const NavigationBarWidget();
         } else {
           return const Scaffold(
             backgroundColor: primaryColor,

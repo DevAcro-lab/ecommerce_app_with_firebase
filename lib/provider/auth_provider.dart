@@ -65,4 +65,19 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
     return signOut;
   }
+
+  Future<void> forgotPassword(String email) async {
+    isLoading = true;
+    notifyListeners();
+    try {
+      _firebaseAuth.sendPasswordResetEmail(email: email);
+      isLoading = false;
+      notifyListeners();
+    } catch (e) {
+      isLoading = false;
+      notifyListeners();
+    }
+    isLoading = false;
+    notifyListeners();
+  }
 }

@@ -37,7 +37,7 @@ class BrandContainer extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Image(
-                  image: AssetImage(
+                  image: NetworkImage(
                     imgUrl,
                   ),
                 ),

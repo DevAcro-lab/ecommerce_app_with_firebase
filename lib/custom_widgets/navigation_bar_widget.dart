@@ -25,7 +25,7 @@ class NavigationBarWidget extends StatelessWidget {
 
   List<Widget> buildScreens() {
     return [
-      const HomeScreen(),
+      HomeScreen(),
       const WishListScreen(),
       const NotificationsScreen(),
       const ProfileScreen(),

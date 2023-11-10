@@ -2,12 +2,17 @@ import 'package:ecommerce_app_with_firebase/constants/colors.dart';
 import 'package:ecommerce_app_with_firebase/constants/routes.dart';
 import 'package:ecommerce_app_with_firebase/custom_widgets/drawer_widget.dart';
 import 'package:ecommerce_app_with_firebase/custom_widgets/header_container.dart';
+import 'package:ecommerce_app_with_firebase/models/product.dart';
+import 'package:ecommerce_app_with_firebase/services/fetch_categories.dart';
+import 'package:ecommerce_app_with_firebase/services/fetch_products_from_firebase.dart';
+import 'package:ecommerce_app_with_firebase/views/category_via_products_screen.dart';
 import 'package:ecommerce_app_with_firebase/views/details_screen.dart';
 import 'package:ecommerce_app_with_firebase/views/shopping_card_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../custom_widgets/brand_container.dart';
+import '../custom_widgets/grid_view_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -218,16 +223,42 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: s.height * 0.022),
             SizedBox(
               height: s.height * 0.057,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: clothingBrands.length,
-                itemBuilder: (context, index) {
-                  return BrandContainer(
-                    title: clothingBrands[index]['name'],
-                    imgUrl: clothingBrands[index]['imgUrl'],
-                    onTap: () {},
-                  );
+              child: FutureBuilder(
+                future: fetchCategories(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: Text(
+                        'Please wait loading categories',
+                        style: TextStyle(
+                          color: customBlackColor,
+                        ),
+                      ),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text(snapshot.error.toString());
+                  } else {
+                    final categories = snapshot.data;
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: categories!.length,
+                      itemBuilder: (context, index) {
+                        return BrandContainer(
+                          title: categories[index],
+                          imgUrl:
+                              "https://pngimg.com/uploads/dress_shirt/dress_shirt_PNG8072.png",
+                          onTap: () {
+                            nextPage(
+                              context,
+                              ProductsViaCategory(
+                                  categoryName: categories[index]),
+                            );
+                          },
+                        );
+                      },
+                    );
+                  }
                 },
               ),
             ),
@@ -253,87 +284,24 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: s.height * 0.022),
             Flexible(
-              child: GridView.builder(
-                padding: EdgeInsets.zero,
-                itemCount: menDressedImages.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: s.width * 0.03,
-                  childAspectRatio: 1 / 1.2,
-                  mainAxisSpacing: s.height * 0.02,
-                ),
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      final url = menDressedImages[index]['imgUrl'];
-                      final name = menDressedImages[index]['dressName'];
-                      final price = menDressedImages[index]['price'];
-
-                      nextPage(
-                        context,
-                        DetailsScreen(url: url, name: name, price: price),
-                        rootNavigator: true,
-                      );
-                    },
-                    child: GridTile(
-                      header: Align(
-                        alignment: Alignment.centerRight,
-                        child: Padding(
-                          padding: const EdgeInsets.all(1.0),
-                          child: IconButton(
-                            splashRadius: 25,
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.favorite_border_outlined,
-                              color: lightGreyColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                      footer: Container(
-                        padding: const EdgeInsets.only(
-                            top: 5, bottom: 5, left: 15, right: 10),
-                        decoration: BoxDecoration(
-                          color: lightGreyColor.withOpacity(0.7),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              menDressedImages[index]['dressName'],
-                              style: const TextStyle(
-                                fontSize: 11,
-                                color: whiteColor,
-                              ),
-                            ),
-                            Text(
-                              menDressedImages[index]['price'],
-                              style: const TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                color: whiteColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: unselectedRadioColor,
-                          image: DecorationImage(
-                            image: NetworkImage(
-                              menDressedImages[index]['imgUrl'],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
+              child: FutureBuilder(
+                future: fetchProductsFromFirebase(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text(snapshot.error.toString()),
+                    );
+                  } else {
+                    final products = snapshot.data;
+                    return GridViewWidget(
+                      products: products,
+                      s: s,
+                    );
+                  }
                 },
               ),
             ),
