@@ -2,107 +2,16 @@ import 'package:ecommerce_app_with_firebase/constants/colors.dart';
 import 'package:ecommerce_app_with_firebase/constants/routes.dart';
 import 'package:ecommerce_app_with_firebase/custom_widgets/drawer_widget.dart';
 import 'package:ecommerce_app_with_firebase/custom_widgets/header_container.dart';
-import 'package:ecommerce_app_with_firebase/models/product.dart';
 import 'package:ecommerce_app_with_firebase/services/fetch_categories.dart';
 import 'package:ecommerce_app_with_firebase/services/fetch_products_from_firebase.dart';
 import 'package:ecommerce_app_with_firebase/views/category_via_products_screen.dart';
-import 'package:ecommerce_app_with_firebase/views/details_screen.dart';
 import 'package:ecommerce_app_with_firebase/views/shopping_card_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../custom_widgets/brand_container.dart';
 import '../custom_widgets/grid_view_widget.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  List<Map<String, dynamic>> clothingBrands = [
-    {
-      'name': 'Adidas',
-      'imgUrl': 'assets/images/adidas.png',
-    },
-    {
-      'name': 'Nike',
-      'imgUrl': 'assets/images/nike.png',
-    },
-    {
-      'name': 'Fila',
-      'imgUrl': 'assets/images/fila.png',
-    },
-    {
-      'name': 'Puma',
-      'imgUrl': 'assets/images/puma.png',
-    },
-    {
-      'name': 'Under Armour',
-      'imgUrl': 'assets/images/under.png',
-    },
-    {
-      'name': 'Reebok',
-      'imgUrl': 'assets/images/reebok.png',
-    },
-    {
-      'name': 'New Balance',
-      'imgUrl': 'assets/images/newbalance.png',
-    },
-    {
-      'name': 'Converse',
-      'imgUrl': 'assets/images/converse.png',
-    },
-    {
-      'name': 'Vans',
-      'imgUrl': 'assets/images/vans.png',
-    },
-    {
-      'name': 'Tommy Hilfiger',
-      'imgUrl': 'assets/images/tommy.png',
-    },
-  ];
-
-  List<Map<String, dynamic>> menDressedImages = [
-    {
-      'dressName': 'Formal Suit',
-      'price': '\$299.99',
-      'imgUrl':
-          'https://pngimg.com/uploads/dress_shirt/dress_shirt_PNG8115.png',
-    },
-    {
-      'dressName': 'Casual Jeans and T-Shirt',
-      'price': '\$49.99',
-      'imgUrl':
-          'https://pngimg.com/uploads/dress_shirt/dress_shirt_PNG8071.png',
-    },
-    {
-      'dressName': 'Sports Attire',
-      'price': '\$79.99',
-      'imgUrl':
-          'https://pngimg.com/uploads/dress_shirt/dress_shirt_PNG8072.png',
-    },
-    {
-      'dressName': 'Business Shirt and Tie',
-      'price': '\$59.99',
-      'imgUrl':
-          'https://pngimg.com/uploads/dress_shirt/dress_shirt_PNG8097.png',
-    },
-    {
-      'dressName': 'Winter Jacket',
-      'price': '\$89.99',
-      'imgUrl':
-          'https://pngimg.com/uploads/dress_shirt/dress_shirt_PNG8076.png',
-    },
-    {
-      'dressName': 'Swim Shorts',
-      'price': '\$29.99',
-      'imgUrl':
-          'https://pngimg.com/uploads/dress_shirt/dress_shirt_PNG8086.png',
-    },
-  ];
 
   @override
   Widget build(BuildContext context) {

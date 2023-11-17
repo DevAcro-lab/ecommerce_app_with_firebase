@@ -72,24 +72,43 @@ class DetailsScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              nextPage(
-                                context,
-                                const ShoppingCartScreen(),
-                              );
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.all(6),
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: whiteColor,
+                          Column(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  nextPage(
+                                    context,
+                                    const ShoppingCartScreen(),
+                                  );
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(6),
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: whiteColor,
+                                  ),
+                                  child: const Icon(
+                                    Icons.shopping_bag_outlined,
+                                    color: customBlackColor,
+                                  ),
+                                ),
                               ),
-                              child: const Icon(
-                                Icons.shopping_bag_outlined,
-                                color: customBlackColor,
+                              SizedBox(height: s.height * 0.01),
+                              GestureDetector(
+                                onTap: () {},
+                                child: Container(
+                                  padding: const EdgeInsets.all(6),
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: whiteColor,
+                                  ),
+                                  child: const Icon(
+                                    Icons.favorite_border,
+                                    color: customBlackColor,
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ],
                       ),
