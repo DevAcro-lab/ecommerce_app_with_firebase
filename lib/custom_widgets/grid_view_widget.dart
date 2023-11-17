@@ -1,12 +1,12 @@
 import 'package:ecommerce_app_with_firebase/constants/routes.dart';
 import 'package:ecommerce_app_with_firebase/custom_widgets/product_container.dart';
-import 'package:ecommerce_app_with_firebase/services/get_product_id_via_index.dart';
-import 'package:ecommerce_app_with_firebase/views/details_screen.dart';
+import 'package:ecommerce_app_with_firebase/provider/toggle_favorite_provider.dart';
+import 'package:ecommerce_app_with_firebase/views/product_details_screen.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import '../models/product.dart';
 
-class GridViewWidget extends StatelessWidget {
+class GridViewWidget extends StatefulWidget {
   const GridViewWidget({
     super.key,
     required this.products,
@@ -17,20 +17,26 @@ class GridViewWidget extends StatelessWidget {
   final Size s;
 
   @override
+  State<GridViewWidget> createState() => _GridViewWidgetState();
+}
+
+class _GridViewWidgetState extends State<GridViewWidget> {
+  bool isFav = false;
+  @override
   Widget build(BuildContext context) {
     return GridView.builder(
       padding: EdgeInsets.zero,
-      itemCount: products?.length,
+      itemCount: widget.products?.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        crossAxisSpacing: s.width * 0.03,
+        crossAxisSpacing: widget.s.width * 0.03,
         childAspectRatio: 1 / 1.2,
-        mainAxisSpacing: s.height * 0.02,
+        mainAxisSpacing: widget.s.height * 0.02,
       ),
       itemBuilder: (context, index) {
-        final product = products![index];
+        final product = widget.products![index];
         return GestureDetector(
-          onTap: () async {
+          onTap: () {
             // final productId = await getProductIdByIndex(index);
             nextPage(
               context,
@@ -38,7 +44,16 @@ class GridViewWidget extends StatelessWidget {
               DetailsScreen(productId: product.id),
             );
           },
-          child: ProductContainer(product: product),
+          child: Consumer<ToggleFavoriteProduct>(
+            builder: (context, favProvider, child) {
+              return ProductContainer(
+                product: product,
+                iconOnTap: () {
+                  favProvider.toggleFavorite(product, context);
+                },
+              );
+            },
+          ),
         );
       },
     );

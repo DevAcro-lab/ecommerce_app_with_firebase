@@ -8,7 +8,9 @@ import 'package:ecommerce_app_with_firebase/custom_widgets/remember_me_widget.da
 import 'package:ecommerce_app_with_firebase/custom_widgets/auth_textfield_with_title.dart';
 import 'package:ecommerce_app_with_firebase/provider/auth_provider.dart';
 import 'package:ecommerce_app_with_firebase/views/auth_view/forgot_password_screen.dart';
+import 'package:ecommerce_app_with_firebase/views/auth_view/sign_up_screen.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -72,6 +74,34 @@ class _SignInScreenState extends State<SignInScreen> {
             SizedBox(height: s.height * 0.02),
             RememberMeWidget(title: 'Remember Me', rememberMe: rememberMe),
             const Spacer(),
+            RichText(
+              text: TextSpan(
+                text: "Don't have an account?",
+                style: const TextStyle(
+                  color: customBlackColor,
+                ),
+                children: [
+                  WidgetSpan(
+                    child: SizedBox(
+                      width: s.width * 0.02,
+                    ),
+                  ),
+                  TextSpan(
+                    text: 'Sign Up',
+                    style: const TextStyle(
+                      color: primaryColor,
+                      fontSize: 15,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => nextPage(
+                            context,
+                            const SignUpScreen(),
+                          ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: s.height * 0.03),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: RichText(

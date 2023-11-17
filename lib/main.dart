@@ -1,8 +1,10 @@
 import 'package:ecommerce_app_with_firebase/constants/colors.dart';
 import 'package:ecommerce_app_with_firebase/firebase_options.dart';
 import 'package:ecommerce_app_with_firebase/models/product.dart';
+import 'package:ecommerce_app_with_firebase/provider/add_to_favorite_notifier.dart';
 import 'package:ecommerce_app_with_firebase/provider/auth_provider.dart';
 import 'package:ecommerce_app_with_firebase/provider/product_notifier.dart';
+import 'package:ecommerce_app_with_firebase/provider/toggle_favorite_provider.dart';
 import 'package:ecommerce_app_with_firebase/provider/toggle_splash_screen_button.dart';
 import 'package:ecommerce_app_with_firebase/services/add_products_to_firebase.dart';
 import 'package:ecommerce_app_with_firebase/services/get_json_response.dart';
@@ -32,6 +34,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => ToggleSplashScreenButton()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => ToggleFavoriteProduct()),
         // ChangeNotifierProvider(create: (_) => ProductNotifier()),
       ],
       child: MaterialApp(

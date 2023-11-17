@@ -9,6 +9,7 @@ CupertinoAlertDialog buildCupertinoAlertDialog(
     required String title,
     content,
     buttonTitle,
+    isLoading = false,
     required VoidCallback onTap,
     required IconData icon}) {
   return CupertinoAlertDialog(
@@ -30,7 +31,11 @@ CupertinoAlertDialog buildCupertinoAlertDialog(
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(backgroundColor: primaryColor),
           onPressed: onTap,
-          child: Text(buttonTitle),
+          child: isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Text(buttonTitle),
         ),
       ),
     ],

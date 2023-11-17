@@ -7,14 +7,18 @@ import 'package:ecommerce_app_with_firebase/services/fetch_products_from_firebas
 import 'package:ecommerce_app_with_firebase/views/category_via_products_screen.dart';
 import 'package:ecommerce_app_with_firebase/views/shopping_card_screen.dart';
 import 'package:flutter/material.dart';
-import '../custom_widgets/brand_container.dart';
-import '../custom_widgets/grid_view_widget.dart';
+import 'package:provider/provider.dart';
+import '../../custom_widgets/brand_container.dart';
+import '../../custom_widgets/grid_view_widget.dart';
+import '../../provider/toggle_favorite_provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<ToggleFavoriteProduct>(context, listen: false)
+        .fetchFavProducts();
     final s = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(

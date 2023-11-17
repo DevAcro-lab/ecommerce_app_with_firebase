@@ -4,7 +4,7 @@ import 'package:ecommerce_app_with_firebase/custom_widgets/auth_header_widget.da
 import 'package:ecommerce_app_with_firebase/custom_widgets/custom_auth_button.dart';
 import 'package:ecommerce_app_with_firebase/custom_widgets/navigation_bar_widget.dart';
 import 'package:ecommerce_app_with_firebase/custom_widgets/auth_textfield_with_title.dart';
-import 'package:ecommerce_app_with_firebase/views/home_screen.dart';
+import 'package:ecommerce_app_with_firebase/views/bottom_navigation_screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class NewPasswordScreen extends StatefulWidget {

@@ -3,7 +3,7 @@ import 'package:ecommerce_app_with_firebase/custom_widgets/navigation_bar_widget
 import 'package:ecommerce_app_with_firebase/models/user.dart';
 import 'package:ecommerce_app_with_firebase/provider/auth_provider.dart';
 import 'package:ecommerce_app_with_firebase/views/auth_view/sign_in_screen.dart';
-import 'package:ecommerce_app_with_firebase/views/home_screen.dart';
+import 'package:ecommerce_app_with_firebase/views/bottom_navigation_screens/home_screen.dart';
 import 'package:ecommerce_app_with_firebase/views/splash_screen_2.dart';
 import 'package:ecommerce_app_with_firebase/views/wrapper_screen.dart';
 import 'package:flutter/material.dart';

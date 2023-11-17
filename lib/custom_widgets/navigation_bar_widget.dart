@@ -1,9 +1,9 @@
 import 'package:ecommerce_app_with_firebase/constants/colors.dart';
-import 'package:ecommerce_app_with_firebase/views/notifications_screen.dart';
-import 'package:ecommerce_app_with_firebase/views/home_screen.dart';
-import 'package:ecommerce_app_with_firebase/views/profile_screen.dart';
+import 'package:ecommerce_app_with_firebase/views/bottom_navigation_screens/notifications_screen.dart';
+import 'package:ecommerce_app_with_firebase/views/bottom_navigation_screens/home_screen.dart';
+import 'package:ecommerce_app_with_firebase/views/bottom_navigation_screens/profile_screen.dart';
 import 'package:ecommerce_app_with_firebase/views/shopping_card_screen.dart';
-import 'package:ecommerce_app_with_firebase/views/wishlist_screen.dart';
+import 'package:ecommerce_app_with_firebase/views/bottom_navigation_screens/wishlist_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';

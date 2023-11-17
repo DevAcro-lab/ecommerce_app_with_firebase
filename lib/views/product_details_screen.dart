@@ -1,11 +1,9 @@
 import 'package:ecommerce_app_with_firebase/constants/colors.dart';
 import 'package:ecommerce_app_with_firebase/constants/routes.dart';
 import 'package:ecommerce_app_with_firebase/custom_widgets/custom_auth_button.dart';
-import 'package:ecommerce_app_with_firebase/models/product.dart';
 import 'package:ecommerce_app_with_firebase/services/product_details_via_id.dart';
 import 'package:ecommerce_app_with_firebase/views/reviews_screen.dart';
 import 'package:ecommerce_app_with_firebase/views/shopping_card_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:readmore/readmore.dart';
@@ -15,6 +13,7 @@ class DetailsScreen extends StatelessWidget {
   final String productId;
 
   double rating = 1;
+  bool isFav = false;
 
   @override
   Widget build(BuildContext context) {
@@ -72,43 +71,25 @@ class DetailsScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Column(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  nextPage(
-                                    context,
-                                    const ShoppingCartScreen(),
-                                  );
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.all(6),
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: whiteColor,
-                                  ),
-                                  child: const Icon(
-                                    Icons.shopping_bag_outlined,
-                                    color: customBlackColor,
-                                  ),
-                                ),
+                          GestureDetector(
+                            onTap: () {
+                              nextPage(
+                                context,
+                                rootNavigator: true,
+                                const ShoppingCartScreen(),
+                              );
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: whiteColor,
                               ),
-                              SizedBox(height: s.height * 0.01),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  padding: const EdgeInsets.all(6),
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: whiteColor,
-                                  ),
-                                  child: const Icon(
-                                    Icons.favorite_border,
-                                    color: customBlackColor,
-                                  ),
-                                ),
+                              child: const Icon(
+                                Icons.shopping_bag_outlined,
+                                color: customBlackColor,
                               ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
@@ -423,6 +404,7 @@ class OtherPictureContainer extends StatelessWidget {
     super.key,
     required this.imageUrl,
   });
+
   final String imageUrl;
 
   @override
